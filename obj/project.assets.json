@@ -12535,23 +12535,23 @@
     ]
   },
   "packageFolders": {
-    "/Users/roly/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Kion\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/roly/Documents/CS3750 - Software Engineering 2/gol/gol.csproj",
+      "projectUniqueName": "c:\\Users\\Kion\\Documents\\Homework\\3750\\gol\\gol.csproj",
       "projectName": "gol",
-      "projectPath": "/Users/roly/Documents/CS3750 - Software Engineering 2/gol/gol.csproj",
-      "packagesPath": "/Users/roly/.nuget/packages/",
-      "outputPath": "/Users/roly/Documents/CS3750 - Software Engineering 2/gol/obj/",
+      "projectPath": "c:\\Users\\Kion\\Documents\\Homework\\3750\\gol\\gol.csproj",
+      "packagesPath": "C:\\Users\\Kion\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Kion\\Documents\\Homework\\3750\\gol\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/roly/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Kion\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
