@@ -273,3 +273,9 @@ __pycache__/
 
 
 # End of https://www.gitignore.io/api/aspnetcore
+
+
+# Local changes to this file
+# Mac files:
+.DS_Store
+._*
