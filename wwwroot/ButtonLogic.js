@@ -1,20 +1,20 @@
 function ButtonEventFire(ButtonEvent) {
     var b = ButtonEvent.target;
-    var x = b.getAttribute("data-x"); 
-    var y = b.getAttribute("data-y");
+    var row = b.getAttribute("data-row"); 
+    var col = b.getAttribute("data-col");
     console.log("x-coordinate: " + x + " y-coordinate: " + y);
+
+    ButtonLife(b);
 }
 
 
-function ButtonLogic(ButtonEvent) {
-    var b = ButtonEvent.target;
+function ButtonLife(b) {
+    //var b = ButtonEvent.target;
     
-    if(b.style.background='white') {
-        b.style.background='black';
+    if(b.style.background=='white') {
+        b.style.backgroundColor='black';
     }
-    else if (b.style.background='black') {
-        b.style.background='white';
+    else  {
+        b.style.backgroundColor='white';
     }
-    
-    
 }
