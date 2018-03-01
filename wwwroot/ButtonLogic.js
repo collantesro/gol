@@ -11,7 +11,7 @@ function ButtonEventFire(ButtonEvent) {
 function ButtonLife(b) {
     //var b = ButtonEvent.target;
     
-    if(b.style.background=='white') {
+    if(b.style.backgroundColor=='white') {
         b.style.backgroundColor='black';
     }
     else  {
