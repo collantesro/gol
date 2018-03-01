@@ -11,8 +11,8 @@ function GenButtons(){
             // For now, set the text of the button as an underscore:
             newButton.innerText = "_";
             // Set its data-* attributes
-            newButton.setAttribute("data-x", i);
-            newButton.setAttribute("data-y", j);
+            newButton.setAttribute("data-row", i);
+            newButton.setAttribute("data-col", j);
             // Add the event listener for the click:
             newButton.addEventListener("click", ButtonEventFire);
             // Add it to the container:
