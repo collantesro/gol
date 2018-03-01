@@ -2,7 +2,7 @@
     background-color: wheat;
 }
 
-button {
+.gol-button {
     background-color: tomato;     
     border: 1px solid crimson;
     width: 40px;
