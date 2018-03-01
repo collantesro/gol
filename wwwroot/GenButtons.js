@@ -8,8 +8,6 @@ function GenButtons(){
         for(let j = 0; j < size; j++){ //For each column:
             // Create Button:
             let newButton = document.createElement("button");
-            // For now, set the text of the button as an underscore:
-            newButton.innerText = "_";
             // Set its data-* attributes
             newButton.setAttribute("data-row", i);
             newButton.setAttribute("data-col", j);
