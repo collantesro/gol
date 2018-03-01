@@ -2,7 +2,7 @@ function ButtonEventFire(ButtonEvent) {
     var b = ButtonEvent.target;
     var row = b.getAttribute("data-row"); 
     var col = b.getAttribute("data-col");
-    console.log("x-coordinate: " + x + " y-coordinate: " + y);
+    console.log("Row: " + row + " Column: " + col);
 
     ButtonLife(b);
 }
