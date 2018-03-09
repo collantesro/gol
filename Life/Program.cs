@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Life{
     class Program{
-        static void Main(string[] args){
+        static void SimulationMain(string[] args){
             Game game = Game.GetInstance();
             int prev = 0;
             Universe old = game.GetUniverse();

@@ -24,11 +24,9 @@ namespace gol
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            // For requests to /, serve the default (index.html) file:
+            app.UseDefaultFiles();
+            app.UseStaticFiles(); // For wwwroot static files.
         }
     }
 }
