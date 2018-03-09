@@ -2,8 +2,12 @@ using System;
 using System.Threading;
 
 namespace Life{
+
+    public delegate void OnTickCallback();
     public class Game{
 
+        // This delegate will be called at the end of Tick()
+        public OnTickCallback tickCallback { get; set;}
         private static Game instance;
         
         // Lock variable for initialization of this Singleton,
@@ -90,6 +94,10 @@ namespace Life{
                 }
             }
             universe = next;
+            
+            if(tickCallback != null){
+                tickCallback();
+            }
         }
 
         public static Game GetInstance(){
