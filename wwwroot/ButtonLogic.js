@@ -37,7 +37,7 @@ function ButtonSlower() {
 //GBTag
 
 function BoardUpdate(flatString) {
-    var bttns = document.querySelector("#GBTag").childNodes(); //document.body.childNodes
+    var bttns = document.querySelector("#GBTag").childNodes; //document.body.childNodes
     var b; 
 
     var index = 0 
