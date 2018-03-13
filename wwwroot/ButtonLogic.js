@@ -38,15 +38,15 @@ function ButtonSlower() {
 //GBTag
 
 function BoardUpdate(flatString) {
-    var bttns = document.querySelector("#GBTag"); //document.body.childNodes
+    var bttns = document.querySelector("#GBTag").childNodes(); //document.body.childNodes
     var b; 
 
     var index = 0 
 
-    for(b in bttns) {
+    for(b = 0; b < bttns.length ; b++ ) {
         if(b.tagName == "BUTTON") {
             if(flatString.charAt(index) == "X") {
-                b.classList.add("alive"); 
+                b.classList.add("alive");
             }
             else {
                 b.classList.remove("alive"); 
