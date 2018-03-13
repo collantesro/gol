@@ -43,7 +43,7 @@ function BoardUpdate(flatString) {
     var index = 0 
 
     for(b = 0; b < bttns.length ; b++ ) {
-        if(b.tagName == "BUTTON") {
+        if(bttns[b].tagName == "BUTTON") {
             if(flatString.charAt(index) == "X") {
                 bttns[b].classList.add("alive");
             }
