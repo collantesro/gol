@@ -16,6 +16,20 @@ function socketClosed(e){
 
 function socketMessage(e){
     console.log("WebSocket message received: ", e.data);
+    let response = e.data.split(":");
+    switch(response[0]){
+        case "board":
+            BoardUpdate(response[1]);
+            break;
+        case "clients":
+            DisplayCount(response[1]);
+            break;
+        case "info":
+            DisplayLog(response[1]);
+            break;
+        default:
+            DisplayLog(e.data);
+    }
 }
 
 function socketError(e){
