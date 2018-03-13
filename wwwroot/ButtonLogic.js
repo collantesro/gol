@@ -45,10 +45,10 @@ function BoardUpdate(flatString) {
     for(b = 0; b < bttns.length ; b++ ) {
         if(b.tagName == "BUTTON") {
             if(flatString.charAt(index) == "X") {
-                bttns[index].classList.add("alive");
+                bttns[b].classList.add("alive");
             }
             else {
-                bttns[index].classList.remove("alive"); 
+                bttns[b].classList.remove("alive"); 
             }
             index++; 
         }
