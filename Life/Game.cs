@@ -74,6 +74,7 @@ namespace Life {
 
             lock(runtime_lock){
                 universe = new Universe();
+                universe.Randomize();
             }
 
             subthread = new Thread(GameLoop);
