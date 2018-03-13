@@ -14,7 +14,6 @@ function ButtonLife(b) {
     b.classList.toggle("alive");
 }
 
-<<<<<<< HEAD
 function ButtonRandomize() {
     //connect to server and send the word randomize
     serverConnection.send(randomize);
@@ -34,7 +33,7 @@ function ButtonSlower() {
     //connect to server and send the word slower
     serverConnection.send(slower);
 }
-=======
+
 //GBTag
 
 function BoardUpdate(flatString) {
@@ -58,4 +57,3 @@ function BoardUpdate(flatString) {
         }
     }
 }
->>>>>>> 802e666007192888c1db8eef5ef36f1c254c39fd
