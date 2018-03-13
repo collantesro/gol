@@ -3,5 +3,5 @@ function DisplayLog(message) {
 }
 
 function DisplayCount(count) {
-    document.querySelector("#statusMessage").textContent += count + "<br/>"; 
+    document.querySelector("#statusMessage").textContent += "Clients Connected: " + count + "<br/>"; 
 }
