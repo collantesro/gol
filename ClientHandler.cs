@@ -47,6 +47,7 @@ namespace gol{
                 switch(command[0]){
                     case "randomize":
                         Life.Game.GetInstance().Randomize();
+                        SendToAll("info:Randomized Board");
                         break;
                     case "toggle":
                         try{
@@ -54,22 +55,22 @@ namespace gol{
                             int y = Int32.Parse(command[2]);
 
                             Life.Game.GetInstance().ToggleCell(x, y);
-                            SendToAll(string.Format("info:toggled {0},{1}", x, y));
+                            SendToAll(string.Format("info:Toggled Cell {0},{1}", x, y));
                         } catch(Exception e){
                             await SendStringAsync(connection, "error:" + e.Message, ct);
                         }
                         break;
                     case "faster":
                         Life.Game.GetInstance().MsToSleep -= 250;
-                        SendToAll(string.Format("info:faster tickrate {0}", Life.Game.GetInstance().MsToSleep));
+                        SendToAll(string.Format("info:Faster Tickrate {0}", Life.Game.GetInstance().MsToSleep));
                         break;
                     case "slower":
                         Life.Game.GetInstance().MsToSleep += 250;
-                        SendToAll(string.Format("info:slower tickrate {0}", Life.Game.GetInstance().MsToSleep));
+                        SendToAll(string.Format("info:Slower Tickrate {0}", Life.Game.GetInstance().MsToSleep));
                         break;
                     case "normal":
                         Life.Game.GetInstance().MsToSleep = 1_000;
-                        SendToAll(string.Format("info:standard tickrate {0}", Life.Game.GetInstance().MsToSleep));
+                        SendToAll(string.Format("info:Standard Tickrate {0}", Life.Game.GetInstance().MsToSleep));
                         break;
                     default:
                         continue;

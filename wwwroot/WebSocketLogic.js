@@ -4,18 +4,26 @@ let serverConnection;
 function connect(){
     let protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     let uri = protocol + "//" + window.location.host + "/ws";
+    
     serverConnection = new WebSocket(uri);
+
+    DisplayLog("WebSocket connecting...");
+
+    serverConnection.onopen = socketConnected;
     serverConnection.onclose = socketClosed;
     serverConnection.onmessage = socketMessage;
     serverConnection.onerror = socketError;
 }
 
 function socketClosed(e){
-    console.log("WebSocket connection was closed");
+    DisplayLog("WebSocket connection was closed.");
+}
+
+function socketConnected(e){
+    DisplayLog("WebSocket connected!");
 }
 
 function socketMessage(e){
-    console.log("WebSocket message received: ", e.data);
     let response = e.data.split(":");
     switch(response[0]){
         case "board":
@@ -33,7 +41,7 @@ function socketMessage(e){
 }
 
 function socketError(e){
-    console.log("WebSocket error: ", e.data);
+    DisplayLog("WebSocket error: " + e.data);
 }
 
 connect();

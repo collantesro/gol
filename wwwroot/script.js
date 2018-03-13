@@ -1,7 +1,8 @@
 function DisplayLog(message) {
-    document.querySelector("#statusMessages").textContent += message + "\r\n";
+    var entry = new Date().toLocaleString() + ": " + message + "<br/>";
+    document.querySelector("#statusMessages").insertAdjacentHTML("afterbegin", entry);
 }
 
 function DisplayCount(count) {
-    document.querySelector("#statusMessages").textContent += "Clients Connected: " + count + "\r\n"; 
+    DisplayLog("Clients Connected: " + count); 
 }

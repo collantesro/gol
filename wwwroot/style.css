@@ -1,3 +1,13 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+#container{
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .gol-button {
     background-color: tomato;     
     border: 1px solid crimson;
@@ -11,4 +21,19 @@
 
 #GBTag{
     line-height: 0;
+}
+
+#actionButtons{
+    display: flex;
+    justify-content: space-around;
+}
+
+#statusMessages{
+    text-align: left;
+    display: inline-block;
+}
+
+#statusMessages::first-line{
+    background-color: tomato;
+    color: white;
 }

@@ -152,6 +152,7 @@ namespace Life {
                 lock(runtime_lock){
                     universe.ToggleCell(x, y);
                 }
+                boardChanged?.Invoke(universe.ToString());
             }
         }
     }

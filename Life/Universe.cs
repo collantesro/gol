@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace Life {
@@ -51,18 +52,19 @@ namespace Life {
         /// <returns></returns>
         public override string ToString() {
             StringBuilder builder = new StringBuilder(Universe.SIZE * Universe.SIZE);
-            builder.AppendLine();
             for(int i = 1; i < SIZE + 1; i++) {
                 for(int j = 1; j < SIZE + 1; j++) {
                     if(Grid[i, j]) builder.Append("X");
                     else builder.Append("O");
                 }
             }
+            Debug.Assert(builder.Length == Universe.SIZE * Universe.SIZE);
             return builder.ToString();
         }
 
         public void ToggleCell(int x, int y) {
-            Grid[x, y] = !Grid[x, y];
+            // Since we have a border of cells around, add 1 to both x and y.
+            Grid[x+1, y+1] = !Grid[x+1, y+1];
         }
     }
 }

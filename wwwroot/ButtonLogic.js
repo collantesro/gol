@@ -36,7 +36,7 @@ function ButtonSlower() {
 //GBTag
 
 function BoardUpdate(flatString) {
-    var bttns = document.querySelector("#GBTag"); //document.body.childNodes
+    var bttns = document.querySelector("#GBTag").childNodes; //document.body.childNodes
     var b; 
 
     var index = 0 
@@ -44,10 +44,10 @@ function BoardUpdate(flatString) {
     for(b = 0; b < bttns.length ; b++ ) {
         if(bttns[b].tagName == "BUTTON") {
             if(flatString.charAt(index) == "X") {
-                b.classList.add("alive"); 
+                bttns[b].classList.add("alive"); 
             }
             else {
-                b.classList.remove("alive"); 
+                bttns[b].classList.remove("alive"); 
             }
             index++; 
         }
