@@ -33,22 +33,21 @@ function ButtonSlower() {
     //connect to server and send the word slower
     serverConnection.send(slower);
 }
-
 //GBTag
 
 function BoardUpdate(flatString) {
-    var bttns = document.querySelector("#GBTag").childNodes; //document.body.childNodes
+    var bttns = document.querySelector("#GBTag"); //document.body.childNodes
     var b; 
 
     var index = 0 
 
-    for(b = 0; b < bttns.length ; b++ ) {
+    for(b in bttns) {
         if(b.tagName == "BUTTON") {
             if(flatString.charAt(index) == "X") {
-                bttns[b].classList.add("alive");
+                b.classList.add("alive"); 
             }
             else {
-                bttns[b].classList.remove("alive"); 
+                b.classList.remove("alive"); 
             }
             index++; 
         }
