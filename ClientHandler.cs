@@ -34,53 +34,58 @@ namespace gol{
             // Send the new number of clients:
             SendToAll("clients:" + allClients.Count.ToString());
 
-            while(true){
-                if (ct.IsCancellationRequested) break;
-                var response = await ReceiveStringAsync(connection, ct);
-                if(string.IsNullOrEmpty(response)){
-                    if(connection.State != WebSocketState.Open){
-                        break;
-                    }
-                    continue;
-                }
-                var command = response.Split(":");
-                switch(command[0]){
-                    case "randomize":
-                        Life.Game.GetInstance().Randomize();
-                        SendToAll("info:Randomized Board");
-                        break;
-                    case "toggle":
-                        try{
-                            int x = Int32.Parse(command[1]);
-                            int y = Int32.Parse(command[2]);
-
-                            Life.Game.GetInstance().ToggleCell(x, y);
-                            SendToAll(string.Format("info:Toggled Cell {0},{1}", x, y));
-                        } catch(Exception e){
-                            await SendStringAsync(connection, "error:" + e.Message, ct);
+            try{
+                while(true){
+                    if (ct.IsCancellationRequested) break;
+                    var response = await ReceiveStringAsync(connection, ct);
+                    if(string.IsNullOrEmpty(response)){
+                        if(connection.State != WebSocketState.Open){
+                            break;
                         }
-                        break;
-                    case "faster":
-                        Life.Game.GetInstance().MsToSleep -= 250;
-                        SendToAll(string.Format("info:Faster Tickrate {0}", Life.Game.GetInstance().MsToSleep));
-                        break;
-                    case "slower":
-                        Life.Game.GetInstance().MsToSleep += 250;
-                        SendToAll(string.Format("info:Slower Tickrate {0}", Life.Game.GetInstance().MsToSleep));
-                        break;
-                    case "normal":
-                        Life.Game.GetInstance().MsToSleep = 1_000;
-                        SendToAll(string.Format("info:Standard Tickrate {0}", Life.Game.GetInstance().MsToSleep));
-                        break;
-                    default:
                         continue;
+                    }
+                    var command = response.Split(":");
+                    switch(command[0]){
+                        case "randomize":
+                            Life.Game.GetInstance().Randomize();
+                            SendToAll("info:Randomized Board");
+                            break;
+                        case "toggle":
+                            try{
+                                int x = Int32.Parse(command[1]);
+                                int y = Int32.Parse(command[2]);
+
+                                Life.Game.GetInstance().ToggleCell(x, y);
+                                SendToAll(string.Format("info:Toggled Cell {0},{1}", x, y));
+                            } catch(Exception e){
+                                await SendStringAsync(connection, "error:" + e.Message, ct);
+                            }
+                            break;
+                        case "faster":
+                            Life.Game.GetInstance().MsToSleep -= 250;
+                            SendToAll(string.Format("info:Faster Tickrate {0}", Life.Game.GetInstance().MsToSleep));
+                            break;
+                        case "slower":
+                            Life.Game.GetInstance().MsToSleep += 250;
+                            SendToAll(string.Format("info:Slower Tickrate {0}", Life.Game.GetInstance().MsToSleep));
+                            break;
+                        case "normal":
+                            Life.Game.GetInstance().MsToSleep = 1_000;
+                            SendToAll(string.Format("info:Standard Tickrate {0}", Life.Game.GetInstance().MsToSleep));
+                            break;
+                        default:
+                            continue;
+                    }
                 }
+                await connection.CloseAsync(WebSocketCloseStatus.NormalClosure, "closing", ct);
+                connection.Dispose();
+            } catch(Exception e){
+                Console.Error.WriteLine("Exception in WebSockets ClientHandler: " + e.Message);
+            } finally {
+                // Socket closed:
+                CancellationToken dummy;
+                allClients.TryRemove(connection, out dummy);
             }
-            // Socket closed:
-            CancellationToken dummy;
-            allClients.TryRemove(connection, out dummy);
-            await connection.CloseAsync(WebSocketCloseStatus.NormalClosure, "closing", ct);
-            connection.Dispose();
 
             // Send the new number of clients:
             SendToAll("clients:" + allClients.Count.ToString());
