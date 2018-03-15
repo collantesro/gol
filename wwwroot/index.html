@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+
+    <!-- For mobile browsers, this zooms in the page to the width of the device screen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!-- Stylesheet for Open Sans font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
 
@@ -22,9 +26,11 @@
         <div id="actionButtons">
             <!--Action Buttons-->
             <button type="button" id="randomize" onclick="ButtonRandomize()">Randomize</button>
-            <button type="button" id="faster" onclick="ButtonFaster()">Faster</button>
-            <button type="button" id="normal" onclick="ButtonNormal()">Normal</button>
-            <button type="button" id="slower" onclick="ButtonSlower()">Slower</button>
+            <div id="speedButtons">
+                <button type="button" id="faster" onclick="ButtonFaster()">Faster</button>
+                <button type="button" id="normal" onclick="ButtonNormal()">Normal</button>
+                <button type="button" id="slower" onclick="ButtonSlower()">Slower</button>
+            </div>
         </div>
         <div id="statusMessages">
         </div>
