@@ -1,6 +1,6 @@
 function ButtonEventFire(ButtonEvent) {
     var b = ButtonEvent.target;
-    var row = b.getAttribute("data-row"); 
+    var row = b.getAttribute("data-row");
     var col = b.getAttribute("data-col");
     console.log("Row: " + row + " Column: " + col);
     serverConnection.send("toggle:" + row + ":" + col);
@@ -10,7 +10,6 @@ function ButtonEventFire(ButtonEvent) {
 
 function ButtonLife(b) {
     //var b = ButtonEvent.target;
-    
     b.classList.toggle("alive");
 }
 
@@ -37,22 +36,22 @@ function ButtonSlower() {
 
 function BoardUpdate(flatString) {
     var bttns = document.querySelector("#GBTag").childNodes; //document.body.childNodes
-    var b; 
+    var b;
 
-    var index = 0 
+    var index = 0
 
-    for(b = 0; b < bttns.length ; b++ ) {
-        if(bttns[b].tagName == "BUTTON") {
-            if(flatString.charAt(index) == "X") {
-                bttns[b].classList.add("alive"); 
+    for (b = 0; b < bttns.length; b++) {
+        if (bttns[b].tagName == "BUTTON") {
+            if (flatString.charAt(index) == "X") {
+                bttns[b].classList.add("alive");
             }
             else {
-                bttns[b].classList.remove("alive"); 
+                bttns[b].classList.remove("alive");
             }
-            index++; 
+            index++;
         }
         else {
-            continue; 
+            continue;
         }
     }
 }

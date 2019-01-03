@@ -1,10 +1,10 @@
-﻿"use strict";
+"use strict";
 let serverConnection;
 
-function connect(){
+function connect() {
     let protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     let uri = protocol + "//" + window.location.host + "/ws";
-    
+
     serverConnection = new WebSocket(uri);
 
     DisplayLog("WebSocket connecting...");
@@ -15,17 +15,17 @@ function connect(){
     serverConnection.onerror = socketError;
 }
 
-function socketClosed(e){
+function socketClosed(e) {
     DisplayLog("WebSocket connection was closed.");
 }
 
-function socketConnected(e){
+function socketConnected(e) {
     DisplayLog("WebSocket connected!");
 }
 
-function socketMessage(e){
+function socketMessage(e) {
     let response = e.data.split(":");
-    switch(response[0]){
+    switch (response[0]) {
         case "board":
             BoardUpdate(response[1]);
             break;
@@ -40,7 +40,7 @@ function socketMessage(e){
     }
 }
 
-function socketError(e){
+function socketError(e) {
     DisplayLog("WebSocket error: " + e.data);
 }
 

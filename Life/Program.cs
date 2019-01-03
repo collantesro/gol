@@ -1,10 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Life{
-    class Program{
-        static void SimulationMain(string[] args){
+namespace Life
+{
+    class Program
+    {
+        static void SimulationMain(string[] args)
+        {
             Game game = Game.GetInstance();
             int prev = 0;
             Universe old = game.GetUniverse();
@@ -12,9 +15,11 @@ namespace Life{
             history.Add(old.ToString());
             Console.Write(old);
 
-            while(prev != history.Count){
+            while (prev != history.Count)
+            {
                 Universe universe = game.GetUniverse();
-                if(universe != old){
+                if (universe != old)
+                {
                     old = universe;
                     prev = history.Count;
                     history.Add(old.ToString());

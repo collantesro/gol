@@ -9,21 +9,27 @@ using Microsoft.AspNetCore.Http;
 
 // From http://gunnarpeipman.com/2017/03/aspnet-core-websocket-chat/
 
-namespace gol{
-    public class ClientHandler{
+namespace gol
+{
+    public class ClientHandler
+    {
         private static ConcurrentDictionary<WebSocket, CancellationToken> allClients = new ConcurrentDictionary<WebSocket, CancellationToken>();
         private readonly RequestDelegate _next;
 
-        public ClientHandler(RequestDelegate next){
+        public ClientHandler(RequestDelegate next)
+        {
             _next = next;
         }
 
-        static ClientHandler(){
+        static ClientHandler()
+        {
             Life.Game.GetInstance().boardChanged = SendBoardToAll;
         }
 
-        public async Task Invoke(HttpContext context){
-            if(!context.WebSockets.IsWebSocketRequest){
+        public async Task Invoke(HttpContext context)
+        {
+            if (!context.WebSockets.IsWebSocketRequest)
+            {
                 await _next.Invoke(context);
                 return;
             }
@@ -34,30 +40,38 @@ namespace gol{
             // Send the new number of clients:
             SendToAll("clients:" + allClients.Count.ToString());
 
-            try{
-                while(true){
+            try
+            {
+                while (true)
+                {
                     if (ct.IsCancellationRequested) break;
                     var response = await ReceiveStringAsync(connection, ct);
-                    if(string.IsNullOrEmpty(response)){
-                        if(connection.State != WebSocketState.Open){
+                    if (string.IsNullOrEmpty(response))
+                    {
+                        if (connection.State != WebSocketState.Open)
+                        {
                             break;
                         }
                         continue;
                     }
                     var command = response.Split(":");
-                    switch(command[0]){
+                    switch (command[0])
+                    {
                         case "randomize":
                             Life.Game.GetInstance().Randomize();
                             SendToAll("info:Randomized Board");
                             break;
                         case "toggle":
-                            try{
+                            try
+                            {
                                 int x = Int32.Parse(command[1]);
                                 int y = Int32.Parse(command[2]);
 
                                 Life.Game.GetInstance().ToggleCell(x, y);
                                 SendToAll(string.Format("info:Toggled Cell {0},{1}", x, y));
-                            } catch(Exception e){
+                            }
+                            catch (Exception e)
+                            {
                                 await SendStringAsync(connection, "error:" + e.Message, ct);
                             }
                             break;
@@ -79,9 +93,13 @@ namespace gol{
                 }
                 await connection.CloseAsync(WebSocketCloseStatus.NormalClosure, "closing", ct);
                 connection.Dispose();
-            } catch(Exception e){
+            }
+            catch (Exception e)
+            {
                 Console.Error.WriteLine("Exception in WebSockets ClientHandler: " + e.Message);
-            } finally {
+            }
+            finally
+            {
                 // Socket closed:
                 CancellationToken dummy;
                 allClients.TryRemove(connection, out dummy);
@@ -91,42 +109,52 @@ namespace gol{
             SendToAll("clients:" + allClients.Count.ToString());
         }
 
-        private static Task SendStringAsync(WebSocket socket, string data, CancellationToken ct = default(CancellationToken)){
+        private static Task SendStringAsync(WebSocket socket, string data, CancellationToken ct = default(CancellationToken))
+        {
             var buffer = Encoding.UTF8.GetBytes(data);
             var segment = new ArraySegment<byte>(buffer);
             return socket.SendAsync(segment, WebSocketMessageType.Text, true, ct);
         }
 
-        private static async Task<string> ReceiveStringAsync(WebSocket socket, CancellationToken ct = default(CancellationToken)){
+        private static async Task<string> ReceiveStringAsync(WebSocket socket, CancellationToken ct = default(CancellationToken))
+        {
             var buffer = new ArraySegment<byte>(new byte[8 * 1024]);
-            using(var ms = new MemoryStream()){
+            using (var ms = new MemoryStream())
+            {
                 WebSocketReceiveResult result;
-                do {
+                do
+                {
                     ct.ThrowIfCancellationRequested();
                     result = await socket.ReceiveAsync(buffer, ct);
                     ms.Write(buffer.Array, buffer.Offset, result.Count);
-                } while(!result.EndOfMessage);
+                } while (!result.EndOfMessage);
 
                 ms.Seek(0, SeekOrigin.Begin);
-                if(result.MessageType != WebSocketMessageType.Text) return null;
+                if (result.MessageType != WebSocketMessageType.Text) return null;
 
-                using(var reader = new StreamReader(ms, Encoding.UTF8)){
+                using (var reader = new StreamReader(ms, Encoding.UTF8))
+                {
                     return await reader.ReadToEndAsync();
                 }
             }
         }
 
-        private static async void SendToAll(string message){
-            if(allClients != null && allClients.Count > 0){
-                foreach(var client in allClients.Keys){
-                    if(client.State == WebSocketState.Open){
+        private static async void SendToAll(string message)
+        {
+            if (allClients != null && allClients.Count > 0)
+            {
+                foreach (var client in allClients.Keys)
+                {
+                    if (client.State == WebSocketState.Open)
+                    {
                         await SendStringAsync(client, message, allClients[client]);
                     }
                 }
             }
         }
 
-        private static void SendBoardToAll(string board){
+        private static void SendBoardToAll(string board)
+        {
             string message = "board:" + board;
             SendToAll(message);
         }

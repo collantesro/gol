@@ -4,5 +4,5 @@ function DisplayLog(message) {
 }
 
 function DisplayCount(count) {
-    DisplayLog("Clients Connected: " + count); 
+    DisplayLog("Clients Connected: " + count);
 }

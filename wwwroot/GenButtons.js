@@ -1,11 +1,11 @@
-function GenButtons(){
+function GenButtons() {
     let container = document.querySelector("#GBTag");
     let size = 10;
-    if(window.UniverseSize){ // In case we decide to change the size, just set window.UniverseSize to a different value.
+    if (window.UniverseSize) { // In case we decide to change the size, just set window.UniverseSize to a different value.
         size = window.UniverseSize;
     }
-    for(let i = 0; i < size; i++){ // For each row:
-        for(let j = 0; j < size; j++){ //For each column:
+    for (let i = 0; i < size; i++) { // For each row:
+        for (let j = 0; j < size; j++) { //For each column:
             // Create Button:
             let newButton = document.createElement("button");
             newButton.classList.add("gol-button")
